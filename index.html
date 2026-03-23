@@ -5,128 +5,314 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sling Party — Roguelite Siege Runs</title>
   <meta name="description" content="Sling your hero party into enemy fortresses in this physics roguelike. Find Relics. Smash Forts.">
+  <meta property="og:title" content="Sling Party">
+  <meta property="og:description" content="Roguelite siege runs. Find Relics. Smash Forts.">
+  <meta property="og:image" content="https://krool.github.io/sling-party-web/feature.png">
+  <meta property="og:url" content="https://krool.github.io/sling-party-web/">
+  <link rel="icon" href="icon.png" type="image/png">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: #e0e0e0;
-      background: #1a1a2e;
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #d0d0d0;
+      background: #0d0d1e;
+      overflow-x: hidden;
     }
+
+    /* ── Sky / Hero Section ─────────────────────────────── */
     .hero-section {
+      position: relative;
       text-align: center;
-      padding: 3rem 1rem 2rem;
-      background: linear-gradient(180deg, #16213e 0%, #1a1a2e 100%);
+      padding: 2.5rem 1rem 0;
+      background: linear-gradient(180deg,
+        #0d0d28 0%,
+        #1a1a3e 30%,
+        #2d1b35 60%,
+        #3a2540 100%);
+      overflow: hidden;
     }
+
+    /* stars */
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 40% 22%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 55% 5%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 70% 18%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 85% 12%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 15% 35%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 60% 30%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 90% 28%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 35% 40%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1.5px 1.5px at 78% 6%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 48% 42%, rgba(255,255,255,0.35), transparent);
+      pointer-events: none;
+    }
+
+    /* crescent moon */
+    .moon {
+      position: absolute;
+      top: 2rem;
+      left: 8%;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e8d5a3;
+      box-shadow: 0 0 20px 6px rgba(232,213,163,0.15);
+    }
+    .moon::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #1a1a3e;
+    }
+
+    .app-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.08);
+      margin-bottom: 1rem;
+      image-rendering: auto;
+    }
+
     .hero-section h1 {
-      font-size: 2.5rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 3rem;
       color: #fff;
-      margin-bottom: 0.25rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+      margin-bottom: 0.15rem;
+      letter-spacing: -0.5px;
     }
-    .hero-section .subtitle {
-      font-size: 1.1rem;
-      color: #74b9ff;
-      margin-bottom: 2rem;
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: #c8a84e;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
     }
+
     .store-badges {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
-    .store-badges a {
-      display: inline-block;
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       background: #fff;
       color: #1a1a2e;
       text-decoration: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: opacity 0.2s;
+      padding: 0.65rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-    .store-badges a:hover { opacity: 0.85; }
-    .features {
-      max-width: 700px;
+    .store-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .store-btn svg { width: 20px; height: 20px; }
+
+    /* ── Feature Banner ─────────────────────────────────── */
+    .banner-wrap {
+      position: relative;
+      margin-top: 0.5rem;
+    }
+    .banner-wrap img {
+      width: 100%;
+      max-width: 800px;
+      display: block;
       margin: 0 auto;
-      padding: 2rem 1rem;
+      border-radius: 0;
     }
+    /* fade bottom edge into page bg */
+    .banner-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(transparent, #0d0d1e);
+    }
+
+    /* ── Fireflies (CSS-only) ──────────────────────────── */
+    .firefly {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #88ff88;
+      box-shadow: 0 0 6px 2px rgba(136,255,136,0.4);
+      animation: float 6s ease-in-out infinite;
+      opacity: 0;
+    }
+    .firefly:nth-child(2) { left: 20%; top: 60%; animation-delay: 1s; background: #aaff77; animation-duration: 7s; }
+    .firefly:nth-child(3) { left: 75%; top: 45%; animation-delay: 2.5s; background: #66ee66; animation-duration: 5s; }
+    .firefly:nth-child(4) { left: 50%; top: 55%; animation-delay: 3.5s; background: #88ff88; animation-duration: 8s; }
+    .firefly:nth-child(5) { left: 88%; top: 65%; animation-delay: 0.5s; background: #aaff77; animation-duration: 6.5s; }
+
+    @keyframes float {
+      0%, 100% { opacity: 0; transform: translate(0, 0); }
+      20% { opacity: 0.8; }
+      50% { opacity: 0.6; transform: translate(15px, -20px); }
+      80% { opacity: 0.7; }
+    }
+
+    /* ── Features ───────────────────────────────────────── */
+    .features {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 1.5rem;
+    }
+
     .features h2 {
       color: #fff;
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 1.25rem;
       text-align: center;
     }
+
     .feature-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: 0.85rem;
     }
-    @media (max-width: 500px) {
-      .feature-grid { grid-template-columns: 1fr; }
-      .hero-section h1 { font-size: 2rem; }
-    }
+
     .feature-card {
-      background: #16213e;
-      border-radius: 8px;
-      padding: 1rem;
+      background: linear-gradient(135deg, #16213e 0%, #1a1a30 100%);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 1.1rem;
+      transition: border-color 0.2s;
     }
+    .feature-card:hover {
+      border-color: rgba(200,168,78,0.25);
+    }
+
+    .feature-card .icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
     .feature-card h3 {
-      color: #74b9ff;
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
+      color: #c8a84e;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
     }
+
     .feature-card p {
-      font-size: 0.9rem;
-      color: #b0b0b0;
+      font-size: 0.88rem;
+      color: #999;
+      line-height: 1.45;
     }
+
+    /* ── Footer ─────────────────────────────────────────── */
     footer {
       text-align: center;
       padding: 2rem 1rem;
-      font-size: 0.85rem;
-      color: #666;
+      font-size: 0.82rem;
+      color: #555;
+      border-top: 1px solid rgba(255,255,255,0.04);
     }
     footer a { color: #74b9ff; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 560px) {
+      .hero-section h1 { font-size: 2.2rem; }
+      .subtitle { font-size: 1rem; }
+      .app-icon { width: 90px; height: 90px; border-radius: 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .moon { width: 28px; height: 28px; top: 1.5rem; }
+      .moon::after { width: 24px; height: 24px; top: -3px; left: 6px; }
+    }
   </style>
 </head>
 <body>
   <div class="hero-section">
+    <div class="moon"></div>
+    <div class="firefly" style="left:30%; top:50%"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+    <div class="firefly"></div>
+
+    <img class="app-icon" src="icon.png" alt="Sling Party" width="120" height="120">
     <h1>Sling Party</h1>
-    <p class="subtitle">Roguelite siege runs. Find Relics. Smash Forts.</p>
+    <p class="subtitle">Roguelite Siege Runs. Find Relics. Smash Forts.</p>
+
     <div class="store-badges">
-      <a href="#">App Store (Coming Soon)</a>
-      <a href="#">Google Play (Coming Soon)</a>
+      <a class="store-btn" href="https://apps.apple.com/us/app/sling-party/id6759985165">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+        App Store
+      </a>
+      <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.krool.slingparty">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76C2.84 23.57 2.6 23.22 2.6 22.78V1.22C2.6 0.78 2.84 0.43 3.18 0.24L13.54 12L3.18 23.76ZM16.36 15.15L5.16 21.6L14.27 12.73L16.36 15.15ZM20.16 10.81C20.56 11.08 20.8 11.5 20.8 12C20.8 12.5 20.56 12.92 20.16 13.19L17.89 14.5L15.54 12L17.89 9.5L20.16 10.81ZM5.16 2.4L16.36 8.85L14.27 11.27L5.16 2.4Z"/></svg>
+        Google Play
+      </a>
+    </div>
+
+    <div class="banner-wrap">
+      <img src="feature.png" alt="Sling Party gameplay — heroes flying through the air smashing a fortress" width="1024" height="500">
     </div>
   </div>
 
   <div class="features">
-    <h2>What is Sling Party?</h2>
+    <h2>Why Play Sling Party?</h2>
     <div class="feature-grid">
       <div class="feature-card">
+        <span class="icon">&#x1F4A5;</span>
         <h3>Physics Destruction</h3>
-        <p>Sling heroes into block fortresses and watch them crumble with satisfying physics.</p>
+        <p>Sling heroes into block fortresses and watch them crumble with satisfying Matter.js physics.</p>
       </div>
       <div class="feature-card">
+        <span class="icon">&#x1F3B2;</span>
         <h3>Roguelite Runs</h3>
         <p>3-floor runs across unique biomes. Every run is different with procedural maps and random relics.</p>
       </div>
       <div class="feature-card">
+        <span class="icon">&#x2694;&#xFE0F;</span>
         <h3>8 Hero Classes</h3>
         <p>Warriors, Mages, Rogues, Druids and more — each with unique passives and skill trees.</p>
       </div>
       <div class="feature-card">
-        <h3>30+ Relics</h3>
-        <p>Collect powerful relics that transform your strategy. Watch out for curses.</p>
+        <span class="icon">&#x1F48E;</span>
+        <h3>30+ Relics &amp; Curses</h3>
+        <p>Collect powerful relics that transform your strategy. But watch out for curses that twist your run.</p>
       </div>
       <div class="feature-card">
+        <span class="icon">&#x1F3D5;&#xFE0F;</span>
         <h3>Camp Upgrades</h3>
-        <p>Build up your camp between runs to unlock new heroes, upgrades, and perks.</p>
+        <p>Build up your camp between runs to unlock new heroes, upgrades, and permanent perks.</p>
       </div>
       <div class="feature-card">
+        <span class="icon">&#x1F30B;</span>
         <h3>3 Biomes</h3>
-        <p>Battle through Goblin Wastes, Frozen Peaks, and the Infernal Keep.</p>
+        <p>Battle through Goblin Wastes, Frozen Peaks, and the Infernal Keep — each with unique enemies.</p>
       </div>
     </div>
   </div>
