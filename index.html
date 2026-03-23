@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sling Party - Privacy Policy</title>
+  <title>Sling Party — Roguelite Siege Runs</title>
+  <meta name="description" content="Sling your hero party into enemy fortresses in this physics roguelike. Find Relics. Smash Forts.">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -11,57 +12,127 @@
       line-height: 1.6;
       color: #e0e0e0;
       background: #1a1a2e;
+    }
+    .hero-section {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      background: linear-gradient(180deg, #16213e 0%, #1a1a2e 100%);
+    }
+    .hero-section h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .hero-section .subtitle {
+      font-size: 1.1rem;
+      color: #74b9ff;
+      margin-bottom: 2rem;
+    }
+    .store-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .store-badges a {
+      display: inline-block;
+      background: #fff;
+      color: #1a1a2e;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+    .store-badges a:hover { opacity: 0.85; }
+    .features {
+      max-width: 700px;
+      margin: 0 auto;
       padding: 2rem 1rem;
     }
-    .container { max-width: 700px; margin: 0 auto; }
-    h1 { color: #fff; margin-bottom: 0.5rem; font-size: 1.8rem; }
-    h2 { color: #ccc; margin: 1.5rem 0 0.5rem; font-size: 1.2rem; }
-    p, li { margin-bottom: 0.5rem; font-size: 0.95rem; }
-    ul { padding-left: 1.5rem; }
-    .date { color: #888; font-size: 0.85rem; margin-bottom: 1.5rem; }
-    a { color: #74b9ff; }
+    .features h2 {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 500px) {
+      .feature-grid { grid-template-columns: 1fr; }
+      .hero-section h1 { font-size: 2rem; }
+    }
+    .feature-card {
+      background: #16213e;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .feature-card h3 {
+      color: #74b9ff;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: #b0b0b0;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    footer a { color: #74b9ff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Sling Party - Privacy Policy</h1>
-    <p class="date">Effective date: March 3, 2026</p>
-
-    <p>Sling Party ("the Game") is a free game developed by Krool ("we", "us"). This policy explains what data the Game collects and how it is used.</p>
-
-    <h2>Data We Collect</h2>
-    <p>The Game uses <strong>Firebase</strong> (by Google) for optional online features. When you use these features, the following data may be collected:</p>
-    <ul>
-      <li><strong>Anonymous identifier</strong> &mdash; Firebase Authentication creates a random anonymous ID to identify your device. No email, name, or login is required.</li>
-      <li><strong>Leaderboard scores</strong> &mdash; If you submit a score to the leaderboard, your player name (chosen by you) and score are stored in Firebase Firestore.</li>
-      <li><strong>Chat messages</strong> &mdash; If you send a message in the in-game chat, your player name and message text are stored in Firebase Firestore.</li>
-    </ul>
-
-    <h2>Data We Do Not Collect</h2>
-    <ul>
-      <li>We do not collect your real name, email address, phone number, or any personal information.</li>
-      <li>We do not collect location data.</li>
-      <li>We do not use advertising SDKs or ad tracking.</li>
-      <li>We do not sell or share data with third parties (beyond Firebase infrastructure).</li>
-    </ul>
-
-    <h2>Local Storage</h2>
-    <p>The Game saves your progress, settings, and preferences locally on your device using browser local storage. This data never leaves your device.</p>
-
-    <h2>Third-Party Services</h2>
-    <p>Firebase (Google) processes the anonymous identifier and online data described above. Google's privacy policy applies to their processing: <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
-
-    <h2>Children's Privacy</h2>
-    <p>The Game does not knowingly collect personal information from children under 13. Since we only use anonymous identifiers and optional player-chosen display names, no personal information is collected from any user.</p>
-
-    <h2>Data Deletion</h2>
-    <p>To delete your data, clear the app's local storage (uninstall and reinstall) or contact us to request deletion of any leaderboard or chat data associated with your anonymous ID.</p>
-
-    <h2>Changes</h2>
-    <p>We may update this policy from time to time. The effective date at the top will be updated accordingly.</p>
-
-    <h2>Contact</h2>
-    <p>For questions about this privacy policy, open an issue at: <a href="https://github.com/Krool/sling-party-web/issues" target="_blank">github.com/Krool/sling-party-web/issues</a></p>
+  <div class="hero-section">
+    <h1>Sling Party</h1>
+    <p class="subtitle">Roguelite siege runs. Find Relics. Smash Forts.</p>
+    <div class="store-badges">
+      <a href="#">App Store (Coming Soon)</a>
+      <a href="#">Google Play (Coming Soon)</a>
+    </div>
   </div>
+
+  <div class="features">
+    <h2>What is Sling Party?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Physics Destruction</h3>
+        <p>Sling heroes into block fortresses and watch them crumble with satisfying physics.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Roguelite Runs</h3>
+        <p>3-floor runs across unique biomes. Every run is different with procedural maps and random relics.</p>
+      </div>
+      <div class="feature-card">
+        <h3>8 Hero Classes</h3>
+        <p>Warriors, Mages, Rogues, Druids and more — each with unique passives and skill trees.</p>
+      </div>
+      <div class="feature-card">
+        <h3>30+ Relics</h3>
+        <p>Collect powerful relics that transform your strategy. Watch out for curses.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Camp Upgrades</h3>
+        <p>Build up your camp between runs to unlock new heroes, upgrades, and perks.</p>
+      </div>
+      <div class="feature-card">
+        <h3>3 Biomes</h3>
+        <p>Battle through Goblin Wastes, Frozen Peaks, and the Infernal Keep.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Krool &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="https://github.com/Krool/sling-party-web/issues">Contact</a></p>
+  </footer>
 </body>
 </html>
